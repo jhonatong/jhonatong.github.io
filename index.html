@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jhonatan Andrifay | Creative Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --accent-red: #ff004c; 
+            --accent-glow: rgba(255, 0, 76, 0.3);
+            --bg-dark: #080808;
+            --card-bg: rgba(18, 18, 18, 0.7);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { cursor: none; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: #e2e8f0; 
+            overflow-x: hidden;
+        }
+
+        /* Background Noise */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .spotlight {
+            position: fixed;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            top: -20vw; right: -20vw;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        #cursor {
+            width: 8px; height: 8px; background: white; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            mix-blend-mode: difference; transition: transform 0.2s;
+        }
+
+        #cursor-follower {
+            width: 30px; height: 30px; border: 1px solid var(--accent-red); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transition: transform 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out;
+        }
+
+        .bento-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 0, 76, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #ff004c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-tag {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Skill Chip Style */
+        .skill-chip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .skill-chip:hover {
+            background: rgba(255, 0, 76, 0.1);
+            border-color: var(--accent-red);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 76, 0.2);
+        }
+
+        .skill-chip i {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="spotlight"></div>
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <nav class="fixed top-0 w-full z-50 px-8 py-8 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-extrabold tracking-tighter">
+                JH<span class="text-[var(--accent-red)]">.</span>
+            </div>
+            <div class="hidden md:flex items-center gap-12 bg-white/5 px-8 py-3 rounded-full border border-white/10 backdrop-blur-md">
+                <a href="#home" class="text-xs font-bold uppercase tracking-widest hover:text-[var(--accent-red)] transition">Home</a>
+                <a href="#about" class="text-xs font-bold uppercase tracking-widest hover:text-[var(--accent-red)] transition">About</a>
+                <a href="#skills" class="text-xs font-bold uppercase tracking-widest hover:text-[var(--accent-red)] transition">Skills</a>
+                <a href="#project" class="text-xs font-bold uppercase tracking-widest hover:text-[var(--accent-red)] transition">Work</a>
+            </div>
+            <a href="mailto:jhonatan@example.com" class="bg-[var(--accent-red)] p-3 rounded-full hover:rotate-12 transition shadow-lg shadow-red-600/20">
+                <i class="fa-solid fa-arrow-up-right-from-square text-white"></i>
+            </a>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center px-8 pt-20">
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7" data-aos="fade-right">
+                <span class="section-tag">Based in Medan, Indonesia</span>
+                <h1 class="text-7xl md:text-9xl font-extrabold leading-[0.85] mb-8 tracking-tighter">
+                    CREATIVE <br> <span class="text-gradient">CODER.</span>
+                </h1>
+                <p class="max-w-md text-gray-400 text-lg leading-relaxed mb-10">
+                    Mahasiswa Informatika yang fokus pada <span class="text-white">Web Experience</span> dan riset <span class="text-white">Deep Learning</span> untuk masa depan medis.
+                </p>
+                <a href="#project" class="inline-block bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-[var(--accent-red)] hover:text-white transition duration-500">
+                    Explore My Work
+                </a>
+            </div>
+            
+            <div class="lg:col-span-5" data-aos="zoom-in">
+                <div class="bento-card aspect-[4/5] p-2">
+                    <img src="https://github.com/jhonatong.png" class="w-full h-full object-cover rounded-[28px] grayscale contrast-125 hover:grayscale-0 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bento-card p-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-extrabold mb-6 italic text-gradient">The Developer.</h2>
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        Nama saya Jhonatan Andrifay Hutabarat, saat ini sedang menempuh pendidikan di <b>Universitas Prima Indonesia (UNPRI)</b>. Saya sangat menyukai tantangan dalam membangun sistem yang kompleks namun tetap memiliki tampilan yang elegan bagi pengguna.
+                    </p>
+                </div>
+
+                <div class="bento-card p-12 flex flex-col justify-center bg-gradient-to-br from-red-900/10 to-transparent" data-aos="fade-up" data-aos-delay="100">
+                    <span class="text-[var(--accent-red)] font-bold text-sm mb-2 uppercase">Experience</span>
+                    <h3 class="text-6xl font-extrabold mb-1">3rd</h3>
+                    <p class="text-gray-500 font-bold uppercase text-[10px] tracking-widest">Year Student @ UNPRI</p>
+                </div>
+            </div>
+
+            <div id="skills" class="mt-6 grid lg:grid-cols-2 gap-6">
+                <div class="bento-card p-10" data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-layer-group text-[var(--accent-red)]"></i> Development Stack
+                    </h3>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="skill-chip"><i class="fa-brands fa-html5 text-orange-500"></i> HTML5</div>
+                        <div class="skill-chip"><i class="fa-brands fa-css3-alt text-blue-500"></i> CSS3</div>
+                        <div class="skill-chip"><i class="fa-brands fa-js text-yellow-400"></i> JavaScript</div>
+                        <div class="skill-chip"><i class="fa-brands fa-react text-cyan-400"></i> React</div>
+                        <div class="skill-chip"><i class="fa-solid fa-wind text-sky-400"></i> Tailwind</div>
+                        <div class="skill-chip"><i class="fa-brands fa-php text-indigo-400"></i> PHP</div>
+                        <div class="skill-chip"><i class="fa-brands fa-laravel text-red-500"></i> Laravel</div>
+                    </div>
+                </div>
+
+                <div class="bento-card p-10" data-aos="fade-left">
+                    <h3 class="text-xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fa-solid fa-brain text-[var(--accent-red)]"></i> Research & AI
+                    </h3>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="skill-chip"><i class="fa-brands fa-python text-blue-400"></i> Python</div>
+                        <div class="skill-chip"><i class="fa-solid fa-robot text-orange-400"></i> TensorFlow</div>
+                        <div class="skill-chip"><i class="fa-solid fa-database text-purple-400"></i> SQL</div>
+                        <div class="skill-chip"><i class="fa-solid fa-chart-line text-green-400"></i> Deep Learning</div>
+                        <div class="skill-chip"><i class="fa-solid fa-flask text-pink-400"></i> Feature Fusion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="project" class="py-20 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="text-5xl font-extrabold tracking-tighter">Selected Work.</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="group" data-aos="fade-right">
+                    <div class="bento-card aspect-video mb-6 overflow-hidden">
+                        <img src="https://via.placeholder.com/1200x800/0a0a0a/ff004c?text=Stroke+AI+Research" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Stroke Detection AI</h3>
+                    <p class="text-gray-500 text-sm tracking-wide font-medium italic">Python • TensorFlow • Feature Fusion</p>
+                </div>
+                <div class="group" data-aos="fade-left">
+                    <div class="bento-card aspect-video mb-6 overflow-hidden">
+                        <img src="https://via.placeholder.com/1200x800/0a0a0a/ff004c?text=Web+Bento+Portfolio" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Bento UI Portfolio</h3>
+                    <p class="text-gray-500 text-sm tracking-wide font-medium italic">Tailwind CSS • JavaScript • AOS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <h2 class="text-5xl md:text-7xl font-extrabold mb-12 tracking-tighter">LET'S CONNECT.</h2>
+            <div class="flex justify-center gap-6 mb-16">
+                <a href="https://github.com/jhonatong" target="_blank" class="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-[var(--accent-red)] transition duration-500"><i class="fa-brands fa-github text-2xl"></i></a>
+                <a href="https://www.instagram.com/jho.hutabarat" target="_blank" class="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-[var(--accent-red)] transition duration-500"><i class="fa-brands fa-instagram text-2xl"></i></a>
+            </div>
+            <p class="text-gray-600 text-[10px] tracking-[0.5em] uppercase font-bold">NIM: 223303030372 • JHONATAN ANDRIFAY</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false });
+
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                follower.style.left = (e.clientX - 11) + 'px';
+                follower.style.top = (e.clientY - 11) + 'px';
+            }, 50);
+        });
+
+        document.querySelectorAll('a, button, .bento-card, .skill-chip').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                follower.style.transform = 'scale(2.5)';
+                follower.style.background = 'var(--accent-glow)';
+            });
+            item.addEventListener('mouseleave', () => {
+                follower.style.transform = 'scale(1)';
+                follower.style.background = 'transparent';
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if(window.scrollY > 50) {
+                nav.style.background = 'rgba(8, 8, 8, 0.8)';
+                nav.style.backdropFilter = 'blur(20px)';
+                nav.style.paddingTop = '1rem';
+                nav.style.paddingBottom = '1rem';
+            } else {
+                nav.style.background = 'transparent';
+                nav.style.backdropFilter = 'none';
+                nav.style.paddingTop = '2rem';
+                nav.style.paddingBottom = '2rem';
+            }
+        });
+    </script>
+</body>
+</html>
